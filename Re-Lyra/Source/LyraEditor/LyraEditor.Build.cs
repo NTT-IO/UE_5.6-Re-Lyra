@@ -6,29 +6,68 @@ public class LyraEditor : ModuleRules
 {
 	public LyraEditor(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-		PublicIncludePaths.AddRange(new string[] { 
-			"LyraEditor"
-		});
-		PublicDependencyModuleNames.AddRange(new string[] { 
-			"Core", 
-			"CoreUObject", 
-			"Engine", 
-			"LyraGame"
-		});
-		
-		PrivateDependencyModuleNames.AddRange(new string[] {
-            "InputCore",
-			"Slate",
-			"SlateCore"
-        });
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs; 
+		PublicIncludePaths.AddRange(
+			new string[] {
+				"LyraEditor"
+			}
+		);
 
-		// Uncomment if you are using Slate UI
-		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
-		
-		// Uncomment if you are using online features
-		// PrivateDependencyModuleNames.Add("OnlineSubsystem");
+		PrivateIncludePaths.AddRange(
+			new string[] {
+			}
+		);
 
-		// To include OnlineSubsystemSteam, add it to the plugins section in your uproject file with the Enabled attribute set to true
+		PublicDependencyModuleNames.AddRange(
+			new string[] {
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"EditorFramework",
+				"UnrealEd",
+				"PhysicsCore",
+				"GameplayTagsEditor",
+				"GameplayTasksEditor",
+				"GameplayAbilities",
+				"GameplayAbilitiesEditor",
+				"StudioTelemetry",
+				"LyraGame",
+			}
+		);
+
+		PrivateDependencyModuleNames.AddRange(
+			new string[] {
+				"InputCore",
+				"Slate",
+				"SlateCore",
+				"ToolMenus",
+				"EditorStyle",
+				"DataValidation",
+				"MessageLog",
+				"Projects",
+				"DeveloperToolSettings",
+				"CollectionManager",
+				"SourceControl",
+				"Chaos"
+			}
+		);
+
+		DynamicallyLoadedModuleNames.AddRange(
+			new string[] {
+			}
+		);
+		PrivateDependencyModuleNames.Add("ExternalRpcRegistry");
+		if (Target.Configuration == UnrealTargetConfiguration.Shipping)
+		{
+			PublicDefinitions.Add("WITH_RPC_REGISTRY=0");
+			PublicDefinitions.Add("WITH_HTTPSERVER_LISTENERS=0");
+		}
+		else
+		{
+			PrivateDependencyModuleNames.Add("HTTPServer");
+			PublicDefinitions.Add("WITH_RPC_REGISTRY=1");
+			PublicDefinitions.Add("WITH_HTTPSERVER_LISTENERS=1");
+		}
+		PublicDefinitions.Add("SHIPPING_DRAW_DEBUG_ERROR=1");
 	}
 }
