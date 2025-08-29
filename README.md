@@ -1,6 +1,8 @@
 # UE_5.6-Re-Lyra
 从零复现Lyra示例
 
+## 2025-8-29
+- 导入蓝图资产，配置引擎音频资产，启动Lyra复刻工程
 ## 2025-8-28
 - 完善LyraGame.Target.cs配置（GameFeaturePlugin启用/关闭，依赖项管理）
 - 导入Lyra原生插件并启用
